@@ -85,4 +85,34 @@
         });
       });
 
-      // Bouton STOP toujours en
+      // Bouton STOP toujours en bas
+      const stop = document.createElement("button");
+      stop.textContent = "STOP IMMÉDIAT";
+      stop.className = "stop";
+      stop.onclick = () => teslaMode ? location.href = "tesla://boombox?stop=1" : alert("STOP envoyé !");
+      grid.appendChild(stop);
+    }
+
+    // === FONCTION PLAY ===
+    function playSound(id, name) {
+      if (teslaMode) {
+        location.href = `tesla://boombox?sound=${id}`;
+      } else {
+        alert("Boombox → " + name.toUpperCase());
+        console.log("Lien Tesla qui sera envoyé :", `tesla://boombox?sound=${id}`);
+      }
+    }
+
+    // Lancement
+    buildButtons();
+
+    // Bonus : plein écran auto dans la Tesla
+    if (navigator.userAgent.includes("Tesla")) {
+      document.documentElement.requestFullscreen?.();
+      teslaMode = true;
+      modeBtn.textContent = "MODE TESLA 🚗";
+      modeBtn.classList.add("tesla");
+    }
+  </script>
+</body>
+</html>
