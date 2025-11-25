@@ -2,60 +2,87 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tesla Boombox Mega Pack</title>
   <style>
-    body { margin:0; background:#000; color:#fff; font-family:Arial; overflow:hidden; }
-    h1 { text-align:center; padding:20px; background:#c00000; margin:0; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:15px; padding:20px; }
-    button { 
-      background:#1c1c1c; color:#fff; border:none; padding:20px; font-size:18px; 
-      border-radius:12px; box-shadow:0 4px 10px rgba(255,0,0,0.3);
+    body {margin:0;background:#000;color:#fff;font-family:Arial;overflow:hidden;}
+    h1 {text-align:center;padding:15px;background:#c00000;margin:0;position:relative;}
+    .mode-btn {
+      position:absolute;right:15px;top:10px;padding:10px 16px;
+      background:#333;border:none;border-radius:8px;color:#fff;font-size:14px;
     }
-    button:active { background:#c00000; transform:scale(0.95); }
-    .cat { grid-column:1/-1; color:#c00000; font-size:22px; margin:20px 10px 0; }
+    .mode-btn.tesla {background:#c00000;}
+    .grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;padding:20px;}
+    button {background:#1c1c1c;color:#fff;border:none;padding:20px;font-size:18px;border-radius:12px;box-shadow:0 4px 15px rgba(255,0,0,0.4);}
+    button:active {transform:scale(0.95);}
+    .cat {grid-column:1/-1;color:#c00000;font-size:22px;margin:20px 10px 0;}
+    .stop {background:#c00000 !important;font-size:24px;font-weight:bold;}
   </style>
 </head>
 <body>
-  <h1>BOOMBOX MEGA PACK</h1>
-  <div class="grid">
 
-    <div class="cat">CLASSIQUES</div>
-    <button onclick="play('lacunaracha')">La Cucaracha</button>
-    <button onclick="play('fart')">Fart Symphony</button>
-    <button onclick="play('rickroll')">Never Gonna Give You Up</button>
-    <button onclick="play('goat')">Cri de chèvre</button>
-    <button onclick="play('applause')">Applaudissements</button>
-    <button onclick="play('snake')">Snake (Nokia)</button>
+  <h1>BOOMBOX MEGA PACK
+    <button id="modeBtn" class="mode-btn">MODE PC 🖥️</button>
+  </h1>
 
-    <div class="cat">MEMES 2025</div>
-    <button onclick="play('yeet')">YEET !</button>
-    <button onclick="play('bruh')">Bruh sound effect</button>
-    <button onclick="play('vineboom')">Vine Boom</button>
-    <button onclick="play('trombone')">Sad Trombone</button>
-    <button onclick="play('airhorn')">Airhorn MLG</button>
-
-    <div class="cat">STARTER PACK TROLL</div>
-    <button onclick="play('police')">Police Siren (USA)</button>
-    <button onclick="play('frenchsiren')">Gyrophare français</button>
-    <button onclick="play('coffin')">Coffin Dance</button>
-    <button onclick="play('nyan')">Nyan Cat (10s)</button>
-
-    <div class="cat">ARRÊT IMMÉDIAT</div>
-    <button style="background:#c00000;font-size:24px;" onclick="stop()">STOP TOUT</button>
+  <div class="grid" id="grid">
+    <!-- Les boutons sont générés en JS pour rester propre -->
   </div>
 
   <script>
-    function play(sound) {
-      // Format officiel Tesla Boombox (testé novembre 2025)
-      window.location = `tesla://boombox?sound=${sound}`;
-    }
-    function stop() {
-      window.location = "tesla://boombox?stop=1";
-    }
+    // === CONFIGURATION DES SONS ===
+    const sounds = [
+      {cat: "CLASSIQUES", list: [
+        {name:"La Cucaracha", id:"lacunaracha"},
+        {name:"Fart Symphony", id:"fart"},
+        {name:"Rick Roll", id:"rickroll"},
+        {name:"Cri de chèvre", id:"goat"},
+        {name:"Applaudissements", id:"applause"},
+        {name:"Snake Nokia", id:"snake"}
+      ]},
+      {cat: "MEMES 2025", list: [
+        {name:"YEET !", id:"yeet"},
+        {name:"Bruh", id:"bruh"},
+        {name:"Vine Boom", id:"vineboom"},
+        {name:"Sad Trombone", id:"trombone"},
+        {name:"Airhorn MLG", id:"airhorn"}
+      ]},
+      {cat: "TROLL ULTIME", list: [
+        {name:"Police US", id:"police"},
+        {name:"Gyrophare FR", id:"frenchsiren"},
+        {name:"Coffin Dance", id:"coffin"},
+        {name:"Nyan Cat", id:"nyan"}
+      ]}
+    ];
 
-    // Bonus : plein écran auto sur Tesla
-    document.documentElement.requestFullscreen?.();
-  </script>
-</body>
-</html>
+    let teslaMode = false;  // false = PC, true = Tesla
+
+    const modeBtn = document.getElementById("modeBtn");
+    const grid = document.getElementById("grid");
+
+    // === SWITCH MODE ===
+    modeBtn.onclick = () => {
+      teslaMode = !teslaMode;
+      modeBtn.textContent = teslaMode ? "MODE TESLA 🚗" : "MODE PC 🖥️";
+      modeBtn.classList.toggle("tesla");
+      buildButtons();
+    };
+
+    // === GÉNÉRATION DES BOUTONS ===
+    function buildButtons() {
+      grid.innerHTML = "";
+      sounds.forEach(category => {
+        const cat = document.createElement("div");
+        cat.className = "cat";
+        cat.textContent = category.cat;
+        grid.appendChild(cat);
+
+        category.list.forEach(s => {
+          const btn = document.createElement("button");
+          btn.textContent = s.name;
+          btn.onclick = () => playSound(s.id, s.name);
+          grid.appendChild(btn);
+        });
+      });
+
+      // Bouton STOP toujours en
