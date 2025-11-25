@@ -6,92 +6,24 @@
   <title>Boombox Mega Pack</title>
   <link href="https://fonts.googleapis.com/css2?family=Circular+Std:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0f0f0f;
-      --card: #1a1a1a;
-      --text: #e0e0e0;
-      --accent: #f22c2c;
-      --accent-dark: #c41e1e;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      background:var(--bg);
-      color:var(--text);
-      font-family:'Circular Std', sans-serif;
-      overflow:hidden;
-      height:100vh;
-      letter-spacing:0.5px;
-    }
-    header {
-      background:linear-gradient(180deg, #1a1a1a 0%, transparent 100%);
-      padding:15px 20px;
-      text-align:center;
-      position:relative;
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid #333;
-    }
-    h1 {
-      font-size:28px;
-      font-weight:900;
-      background:linear-gradient(90deg, #fff, var(--accent));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-    .mode-btn {
-      position:absolute; right:20px; top:18px;
-      padding:10px 18px; border-radius:50px;
-      border:none; font-weight:700; font-size:14px;
-      cursor:pointer; transition:all 0.3s;
-      background:#333; color:#fff;
-    }
-    .mode-btn.tesla { background:var(--accent); box-shadow:0 0 20px rgba(242,44,44,0.4); }
-
-    .container { padding:20px; height:calc(100vh - 80px); overflow-y:auto; }
-    .category { margin:30px 0 15px; font-size:20px; font-weight:700; color:var(--accent); }
-    .grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
-      gap:18px;
-    }
-    .btn {
-      background:var(--card);
-      border:none;
-      border-radius:20px;
-      padding:22px 12px;
-      font-size:17px;
-      font-weight:600;
-      color:var(--text);
-      cursor:pointer;
-      transition:all 0.25s;
-      box-shadow:0 8px 20px rgba(0,0,0,0.4);
-      position:relative;
-      overflow:hidden;
-    }
-    .btn::before {
-      content:"";
-      position:absolute;
-      top:50%; left:50%;
-      width:0; height:0;
-      background:rgba(242,44,44,0.3);
-      border-radius:50%;
-      transform:translate(-50%,-50%);
-      transition:all 0.6s;
-    }
-    .btn:active::before { width:300px; height:300px; }
-    .btn:active { transform:scale(0.94); box-shadow:0 4px 10px rgba(242,44,44,0.4); }
-
-    .stop-btn {
-      background:linear-gradient(135deg, var(--accent), var(--accent-dark)) !important;
-      grid-column:1/-1;
-      font-size:26px !important;
-      font-weight:900;
-      padding:28px !important;
-      animation:pulse 3s infinite;
-    }
-    @keyframes pulse { 0%,100% { box-shadow:0 0 20px rgba(242,44,44,0.6); } 50% { box-shadow:0 0 35px rgba(242,44,44,0.9); } }
-
-    .icon { font-size:40px; display:block; margin-bottom:8px; }
+    :root{--bg:#0f0f0f;--card:#1a1a1a;--text:#e0e0e0;--accent:#f22c2c;--accent-dark:#c41e1e;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Circular Std',sans-serif;overflow:hidden;height:100vh;}
+    header{background:linear-gradient(180deg,#1a1a1a 0%,transparent 100%);padding:15px 20px;text-align:center;position:relative;backdrop-filter:blur(10px);border-bottom:1px solid #333;}
+    h1{font-size:28px;font-weight:900;background:linear-gradient(90deg,#fff,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;}
+    .mode-btn{position:absolute;right:20px;top:18px;padding:10px 18px;border-radius:50px;border:none;font-weight:700;font-size:14px;cursor:pointer;transition:all .3s;background:#333;color:#fff;}
+    .mode-btn.tesla{background:var(--accent);box-shadow:0 0 20px rgba(242,44,44,.4);}
+    .container{padding:20px;height:calc(100vh - 80px);overflow-y:auto;}
+    .category{margin:30px 0 15px;font-size:20px;font-weight:700;color:var(--accent);}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;}
+    .btn{background:var(--card);border:none;border-radius:20px;padding:22px 12px;font-size:17px;font-weight:600;color:var(--text);cursor:pointer;transition:all .25s;box-shadow:0 8px 20px rgba(0,0,0,.4);position:relative;overflow:hidden;}
+    .btn::before{content:"";position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(242,44,44,.3);border-radius:50%;transform:translate(-50%,-50%);transition:all .6s;}
+    .btn:active::before{width:300px;height:300px;}
+    .btn:active{transform:scale(0.94);box-shadow:0 4px 10px rgba(242,44,44,.4);}
+    .stop-btn{background:linear-gradient(135deg,var(--accent),var(--accent-dark))!important;grid-column:1/-1;font-size:26px!important;font-weight:900;padding:28px!important;animation:pulse 3s infinite;}
+    @keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(242,44,44,.6)}50%{box-shadow:0 0 35px rgba(242,44,44,.9)}}
+    .icon{font-size:40px;display:block;margin-bottom:8px;}
+    .unlock{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--accent);color:#fff;padding:30px 50px;border-radius:20px;font-size:24px;font-weight:900;z-index:999;}
   </style>
 </head>
 <body>
@@ -101,42 +33,66 @@
   <button id="modeBtn" class="mode-btn">MODE PC</button>
 </header>
 
+<!-- Bouton pour débloquer le son (apparaît uniquement si besoin) -->
+<div id="unlock" class="unlock">Appuie ici pour activer le son</div>
+
 <div class="container">
-  <div id="grid"></div>
+  <div id="grid" class="grid"></div>
 </div>
 
 <audio id="player" preload="auto"></audio>
 
 <script>
-  const sounds = [
-    {cat:"CLASSIQUES", icon:"🎺", list:[
-      {n:"La Cucaracha", id:"lacunaracha", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@lacunaracha.mp3"},
-      {n:"Fart Symphony", id:"fart", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@fart.mp3"},
-      {n:"Rick Roll", id:"rickroll", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@rickroll.mp3"},
-      {n:"Chèvre", id:"goat", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@goat.mp3"},
-      {n:"Applaudissements", id:"applause", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@applause.mp3"},
-      {n:"Snake Nokia", id:"snake", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@snake.mp3"}
+  const sounds = [ /* même tableau que tout à l’heure – je le remets complet pour que ça marche direct */ 
+    {cat:"CLASSIQUES",icon:"Trumpet",list:[
+      {n:"La Cucaracha",id:"lacunaracha",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@lacunaracha.mp3"},
+      {n:"Fart Symphony",id:"fart",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@fart.mp3"},
+      {n:"Rick Roll",id:"rickroll",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@rickroll.mp3"},
+      {n:"Chèvre",id:"goat",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@goat.mp3"},
+      {n:"Applaudissements",id:"applause",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@applause.mp3"},
+      {n:"Snake Nokia",id:"snake",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@snake.mp3"}
     ]},
-    {cat:"MEMES", icon:"😂", list:[
-      {n:"YEET !", id:"yeet", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@yeet.mp3"},
-      {n:"Bruh", id:"bruh", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@bruh.mp3"},
-      {n:"Vine Boom", id:"vineboom", url:"https://freesound.org/data/previews/639/639329_5674468-lq.mp3"},
-      {n:"Sad Trombone", id:"trombone", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@trombone.mp3"},
-      {n:"Airhorn", id:"airhorn", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@airhorn.mp3"}
+    {cat:"MEMES",icon:"Laughing",list:[
+      {n:"YEET !",id:"yeet",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@yeet.mp3"},
+      {n:"Bruh",id:"bruh",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@bruh.mp3"},
+      {n:"Vine Boom",id:"vineboom",url:"https://freesound.org/data/previews/639/639329_5674468-lq.mp3"},
+      {n:"Sad Trombone",id:"trombone",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@trombone.mp3"},
+      {n:"Airhorn",id:"airhorn",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@airhorn.mp3"}
     ]},
-    {cat:"TROLL", icon:"😈", list:[
-      {n:"Police US", id:"police", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@police.mp3"},
-      {n:"Gyrophare FR", id:"frenchsiren", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@frenchsiren.mp3"},
-      {n:"Coffin Dance", id:"coffin", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@coffin.mp3"},
-      {n:"Nyan Cat", id:"nyan", url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@nyan.mp3"}
+    {cat:"TROLL",icon:"Demon",list:[
+      {n:"Police US",id:"police",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@police.mp3"},
+      {n:"Gyrophare FR",id:"frenchsiren",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@frenchsiren.mp3"},
+      {n:"Coffin Dance",id:"coffin",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@coffin.mp3"},
+      {n:"Nyan Cat",id:"nyan",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@nyan.mp3"}
     ]}
   ];
 
   let teslaMode = false;
-  const modeBtn = document.getElementById("modeBtn");
-  const grid = document.getElementById("grid");
   const player = document.getElementById("player");
+  const unlockBtn = document.getElementById("unlock");
 
+  // === DÉBLOCAGE AUDIO (la magie qui résout 99 % des cas) ===
+  function unlockAudio() {
+    const silent = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=="); // 0,1s de silence
+    silent.play().then(() => {
+      unlockBtn.style.display = "none";
+      console.log("Audio débloqué !");
+    }).catch(() => {});
+  }
+  unlockBtn.onclick = unlockAudio;
+  document.body.onclick = () => unlockAudio(); // au premier clic n’importe où
+
+  // === PLAY ===
+  function playSound(url) {
+    player.src = url;
+    player.play().catch(e => {
+      console.log("Son bloqué → clique une fois n’importe où sur la page");
+      unlockBtn.style.display = "block";
+    });
+  }
+
+  // === RESTE DU CODE ===
+  const modeBtn = document.getElementById("modeBtn");
   modeBtn.onclick = () => {
     teslaMode = !teslaMode;
     modeBtn.textContent = teslaMode ? "MODE TESLA" : "MODE PC";
@@ -144,43 +100,25 @@
   };
 
   function createButtons() {
+    const grid = document.getElementById("grid");
     grid.innerHTML = "";
     sounds.forEach(cat => {
-      const title = document.createElement("div");
-      title.className = "category";
-      title.innerHTML = cat.icon + " " + cat.cat;
-      grid.appendChild(title);
-
+      const title = document.createElement("div"); title.className="category"; title.innerHTML = cat.icon + " " + cat.cat; grid.appendChild(title);
       cat.list.forEach(s => {
-        const b = document.createElement("button");
-        b.className = "btn";
+        const b = document.createElement("button"); b.className="btn";
         b.innerHTML = `<span class="icon">${getIcon(s.n)}</span>${s.n}`;
-        b.onclick = () => teslaMode ? location.href=`tesla://boombox?sound=${s.id}` : (player.src=s.url, player.play());
+        b.onclick = () => teslaMode ? location.href=`tesla://boombox?sound=${s.id}` : playSound(s.url);
         grid.appendChild(b);
       });
     });
-
-    const stop = document.createElement("button");
-    stop.className = "btn stop-btn";
-    stop.textContent = "STOP IMMÉDIAT";
+    const stop = document.createElement("button"); stop.className="btn stop-btn"; stop.textContent="STOP IMMÉDIAT";
     stop.onclick = () => teslaMode ? location.href="tesla://boombox?stop=1" : player.pause();
     grid.appendChild(stop);
   }
 
-  function getIcon(name) {
-    const map = { "Rick Roll":"🕺", "Chèvre":"🐐", "Police":"🚔", "Gyrophare":"🚨", "Coffin":"⚰️", "Nyan":"🌈" };
-    for (let k in map) if (name.includes(k)) return map[k];
-    return "🔊";
-  }
+  function getIcon(n){const m={"Rick Roll":"Dancing","Chèvre":"Goat","Police":"Police Car","Gyrophare":"Police Flash","Coffin":"Coffin","Nyan":"Rainbow"};for(let k in m)if(n.includes(k))return m[k];return "Speaker";}
 
-  // Auto-détection Tesla
-  if (navigator.userAgent.includes("Tesla") || /Tesla/i.test(navigator.vendor)) {
-    teslaMode = true;
-    modeBtn.textContent = "MODE TESLA";
-    modeBtn.classList.add("tesla");
-    document.documentElement.requestFullscreen();
-  }
-
+  if (navigator.userAgent.includes("Tesla")) { teslaMode=true; modeBtn.textContent="MODE TESLA"; modeBtn.classList.add("tesla"); document.documentElement.requestFullscreen(); }
   createButtons();
 </script>
 </body>
