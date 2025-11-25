@@ -7,13 +7,10 @@
   <style>
     body {margin:0;background:#000;color:#fff;font-family:Arial;overflow:hidden;}
     h1 {text-align:center;padding:15px;background:#c00000;margin:0;position:relative;}
-    .mode-btn {
-      position:absolute;right:15px;top:10px;padding:10px 16px;
-      background:#333;border:none;border-radius:8px;color:#fff;font-size:14px;
-    }
+    .mode-btn {position:absolute;right:15px;top:10px;padding:10px 16px;background:#333;border:none;border-radius:8px;color:#fff;font-size:14px;cursor:pointer;}
     .mode-btn.tesla {background:#c00000;}
     .grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;padding:20px;}
-    button {background:#1c1c1c;color:#fff;border:none;padding:20px;font-size:18px;border-radius:12px;box-shadow:0 4px 15px rgba(255,0,0,0.4);}
+    button {background:#1c1c1c;color:#fff;border:none;padding:20px;font-size:18px;border-radius:12px;box-shadow:0 4px 15px rgba(255,0,0,0.4);cursor:pointer;}
     button:active {transform:scale(0.95);}
     .cat {grid-column:1/-1;color:#c00000;font-size:22px;margin:20px 10px 0;}
     .stop {background:#c00000 !important;font-size:24px;font-weight:bold;}
@@ -22,97 +19,88 @@
 <body>
 
   <h1>BOOMBOX MEGA PACK
-    <button id="modeBtn" class="mode-btn">MODE PC 🖥️</button>
+    <button id="modeBtn" class="mode-btn">MODE PC</button>
   </h1>
 
-  <div class="grid" id="grid">
-    <!-- Les boutons sont générés en JS pour rester propre -->
-  </div>
+  <div class="grid" id="grid"></div>
+
+  <!-- Audio player caché -->
+  <audio id="player" preload="auto"></audio>
 
   <script>
-    // === CONFIGURATION DES SONS ===
     const sounds = [
       {cat: "CLASSIQUES", list: [
-        {name:"La Cucaracha", id:"lacunaracha"},
-        {name:"Fart Symphony", id:"fart"},
-        {name:"Rick Roll", id:"rickroll"},
-        {name:"Cri de chèvre", id:"goat"},
-        {name:"Applaudissements", id:"applause"},
-        {name:"Snake Nokia", id:"snake"}
+        {name:"La Cucaracha", id:"lacunaracha", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@lacunaracha.mp3"},
+        {name:"Fart Symphony", id:"fart", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@fart.mp3"},
+        {name:"Rick Roll", id:"rickroll", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@rickroll.mp3"},
+        {name:"Cri de chèvre", id:"goat", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@goat.mp3"},
+        {name:"Applaudissements", id:"applause", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@applause.mp3"},
+        {name:"Snake Nokia", id:"snake", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@snake.mp3"}
       ]},
       {cat: "MEMES 2025", list: [
-        {name:"YEET !", id:"yeet"},
-        {name:"Bruh", id:"bruh"},
-        {name:"Vine Boom", id:"vineboom"},
-        {name:"Sad Trombone", id:"trombone"},
-        {name:"Airhorn MLG", id:"airhorn"}
+        {name:"YEET !", id:"yeet", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@yeet.mp3"},
+        {name:"Bruh", id:"bruh", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@bruh.mp3"},
+        {name:"Vine Boom", id:"vineboom", pc:"https://freesound.org/data/previews/639/639329_5674468-lq.mp3"},
+        {name:"Sad Trombone", id:"trombone", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@trombone.mp3"},
+        {name:"Airhorn MLG", id:"airhorn", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@airhorn.mp3"}
       ]},
       {cat: "TROLL ULTIME", list: [
-        {name:"Police US", id:"police"},
-        {name:"Gyrophare FR", id:"frenchsiren"},
-        {name:"Coffin Dance", id:"coffin"},
-        {name:"Nyan Cat", id:"nyan"}
+        {name:"Police US", id:"police", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@police.mp3"},
+        {name:"Gyrophare FR", id:"frenchsiren", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@frenchsiren.mp3"},
+        {name:"Coffin Dance", id:"coffin", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@coffin.mp3"},
+        {name:"Nyan Cat", id:"nyan", pc:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@nyan.mp3"}
       ]}
     ];
 
-    let teslaMode = false;  // false = PC, true = Tesla
-
+    let teslaMode = false;
     const modeBtn = document.getElementById("modeBtn");
     const grid = document.getElementById("grid");
+    const player = document.getElementById("player");
 
-    // === SWITCH MODE ===
     modeBtn.onclick = () => {
       teslaMode = !teslaMode;
-      modeBtn.textContent = teslaMode ? "MODE TESLA 🚗" : "MODE PC 🖥️";
+      modeBtn.textContent = teslaMode ? "MODE TESLA" : "MODE PC";
       modeBtn.classList.toggle("tesla");
       buildButtons();
     };
 
-    // === GÉNÉRATION DES BOUTONS ===
     function buildButtons() {
       grid.innerHTML = "";
       sounds.forEach(category => {
-        const cat = document.createElement("div");
-        cat.className = "cat";
-        cat.textContent = category.cat;
-        grid.appendChild(cat);
-
+        const cat = document.createElement("div"); cat.className="cat"; cat.textContent=category.cat; grid.appendChild(cat);
         category.list.forEach(s => {
           const btn = document.createElement("button");
           btn.textContent = s.name;
-          btn.onclick = () => playSound(s.id, s.name);
+          btn.onclick = () => playSound(s.id, s.name, s.pc);
           grid.appendChild(btn);
         });
       });
-
-      // Bouton STOP toujours en bas
       const stop = document.createElement("button");
       stop.textContent = "STOP IMMÉDIAT";
       stop.className = "stop";
-      stop.onclick = () => teslaMode ? location.href = "tesla://boombox?stop=1" : alert("STOP envoyé !");
+      stop.onclick = () => teslaMode ? location.href="tesla://boombox?stop=1" : player.pause();
       grid.appendChild(stop);
     }
 
-    // === FONCTION PLAY ===
-    function playSound(id, name) {
+    function playSound(id, name, pcUrl) {
       if (teslaMode) {
         location.href = `tesla://boombox?sound=${id}`;
       } else {
-        alert("Boombox → " + name.toUpperCase());
-        console.log("Lien Tesla qui sera envoyé :", `tesla://boombox?sound=${id}`);
+        player.src = pcUrl;
+        player.play();
+        console.log("PC → joue", name);
       }
     }
 
-    // Lancement
-    buildButtons();
-
-    // Bonus : plein écran auto dans la Tesla
-    if (navigator.userAgent.includes("Tesla")) {
-      document.documentElement.requestFullscreen?.();
+    // Détection automatique Tesla
+    if (navigator.userAgent.includes("Tesla") || location.href.includes("tesla")) {
       teslaMode = true;
-      modeBtn.textContent = "MODE TESLA 🚗";
+      modeBtn.textContent = "MODE TESLA";
       modeBtn.classList.add("tesla");
     }
+
+    buildButtons();
+    document.documentElement.requestFullscreen?.();
   </script>
 </body>
 </html>
