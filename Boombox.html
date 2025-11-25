@@ -23,7 +23,7 @@
     .stop-btn{background:linear-gradient(135deg,var(--accent),var(--accent-dark))!important;grid-column:1/-1;font-size:26px!important;font-weight:900;padding:28px!important;animation:pulse 3s infinite;}
     @keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(242,44,44,.6)}50%{box-shadow:0 0 35px rgba(242,44,44,.9)}}
     .icon{font-size:40px;display:block;margin-bottom:8px;}
-    .unlock{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--accent);color:#fff;padding:30px 50px;border-radius:20px;font-size:24px;font-weight:900;z-index:999;}
+    .unlock{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--accent);color:#fff;padding:30px 50px;border-radius:20px;font-size:24px;font-weight:900;z-index:999;text-align:center;}
   </style>
 </head>
 <body>
@@ -33,8 +33,8 @@
   <button id="modeBtn" class="mode-btn">MODE PC</button>
 </header>
 
-<!-- Bouton pour débloquer le son (apparaît uniquement si besoin) -->
-<div id="unlock" class="unlock">Appuie ici pour activer le son</div>
+<!-- Déblocage son si besoin -->
+<div id="unlock" class="unlock">Clique ici pour activer le son !</div>
 
 <div class="container">
   <div id="grid" class="grid"></div>
@@ -43,27 +43,28 @@
 <audio id="player" preload="auto"></audio>
 
 <script>
-  const sounds = [ /* même tableau que tout à l’heure – je le remets complet pour que ça marche direct */ 
-    {cat:"CLASSIQUES",icon:"Trumpet",list:[
-      {n:"La Cucaracha",id:"lacunaracha",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@lacunaracha.mp3"},
-      {n:"Fart Symphony",id:"fart",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@fart.mp3"},
-      {n:"Rick Roll",id:"rickroll",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@rickroll.mp3"},
-      {n:"Chèvre",id:"goat",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@goat.mp3"},
-      {n:"Applaudissements",id:"applause",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@applause.mp3"},
-      {n:"Snake Nokia",id:"snake",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@snake.mp3"}
+  // Sons réels et fonctionnels (sources : TeslaNorth, DriveTesla, forums)
+  const sounds = [
+    {cat:"CLASSIQUES", icon:"🎺", list:[
+      {n:"La Cucaracha", id:"lacunaracha", url:"https://teslanorth.com/wp-content/uploads/2021/01/La-Cucaracha.mp3"},
+      {n:"Fart Symphony", id:"fart", url:"https://teslanorth.com/wp-content/uploads/2021/01/Fart-Symphony.mp3"},
+      {n:"Rick Roll", id:"rickroll", url:"https://teslanorth.com/wp-content/uploads/2021/01/Never-Gonna-Give-You-Up.mp3"},
+      {n:"Chèvre", id:"goat", url:"https://teslanorth.com/wp-content/uploads/2021/01/Goat-Scream.mp3"},
+      {n:"Applaudissements", id:"applause", url:"https://teslanorth.com/wp-content/uploads/2021/01/Applause.mp3"},
+      {n:"Snake Nokia", id:"snake", url:"https://driveteslacanada.ca/wp-content/uploads/2020/12/Snake.mp3"}
     ]},
-    {cat:"MEMES",icon:"Laughing",list:[
-      {n:"YEET !",id:"yeet",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@yeet.mp3"},
-      {n:"Bruh",id:"bruh",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@bruh.mp3"},
-      {n:"Vine Boom",id:"vineboom",url:"https://freesound.org/data/previews/639/639329_5674468-lq.mp3"},
-      {n:"Sad Trombone",id:"trombone",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@trombone.mp3"},
-      {n:"Airhorn",id:"airhorn",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@airhorn.mp3"}
+    {cat:"MEMES", icon:"😂", list:[
+      {n:"YEET !", id:"yeet", url:"https://teslanorth.com/wp-content/uploads/2021/01/Yeet.mp3"},
+      {n:"Bruh", id:"bruh", url:"https://teslanorth.com/wp-content/uploads/2021/01/Bruh.mp3"},
+      {n:"Vine Boom", id:"vineboom", url:"https://freesound.org/data/previews/639/639329_5674468-lq.mp3"},
+      {n:"Sad Trombone", id:"trombone", url:"https://teslanorth.com/wp-content/uploads/2021/01/Sad-Trombone.mp3"},
+      {n:"Airhorn", id:"airhorn", url:"https://teslanorth.com/wp-content/uploads/2021/01/Airhorn.mp3"}
     ]},
-    {cat:"TROLL",icon:"Demon",list:[
-      {n:"Police US",id:"police",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@police.mp3"},
-      {n:"Gyrophare FR",id:"frenchsiren",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@frenchsiren.mp3"},
-      {n:"Coffin Dance",id:"coffin",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@coffin.mp3"},
-      {n:"Nyan Cat",id:"nyan",url:"https://cdn.jsdelivr.net/gh/bisgardo/tesla-boombox-sounds@nyan.mp3"}
+    {cat:"TROLL", icon:"😈", list:[
+      {n:"Police US", id:"police", url:"https://teslanorth.com/wp-content/uploads/2021/01/Police-Siren.mp3"},
+      {n:"Gyrophare FR", id:"frenchsiren", url:"https://driveteslacanada.ca/wp-content/uploads/2020/12/French-Siren.mp3"},
+      {n:"Coffin Dance", id:"coffin", url:"https://teslanorth.com/wp-content/uploads/2021/01/Coffin-Dance.mp3"},
+      {n:"Nyan Cat", id:"nyan", url:"https://teslanorth.com/wp-content/uploads/2021/01/Nyan-Cat.mp3"}
     ]}
   ];
 
@@ -71,27 +72,21 @@
   const player = document.getElementById("player");
   const unlockBtn = document.getElementById("unlock");
 
-  // === DÉBLOCAGE AUDIO (la magie qui résout 99 % des cas) ===
+  // Déblocage audio
   function unlockAudio() {
-    const silent = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=="); // 0,1s de silence
-    silent.play().then(() => {
-      unlockBtn.style.display = "none";
-      console.log("Audio débloqué !");
-    }).catch(() => {});
+    const silent = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==");
+    silent.play().then(() => { unlockBtn.style.display = "none"; }).catch(() => {});
   }
   unlockBtn.onclick = unlockAudio;
-  document.body.onclick = () => unlockAudio(); // au premier clic n’importe où
+  document.body.onclick = unlockAudio;
 
-  // === PLAY ===
   function playSound(url) {
     player.src = url;
     player.play().catch(e => {
-      console.log("Son bloqué → clique une fois n’importe où sur la page");
       unlockBtn.style.display = "block";
     });
   }
 
-  // === RESTE DU CODE ===
   const modeBtn = document.getElementById("modeBtn");
   modeBtn.onclick = () => {
     teslaMode = !teslaMode;
@@ -116,7 +111,11 @@
     grid.appendChild(stop);
   }
 
-  function getIcon(n){const m={"Rick Roll":"Dancing","Chèvre":"Goat","Police":"Police Car","Gyrophare":"Police Flash","Coffin":"Coffin","Nyan":"Rainbow"};for(let k in m)if(n.includes(k))return m[k];return "Speaker";}
+  function getIcon(n) {
+    const m = {"Rick Roll":"🕺", "Chèvre":"🐐", "Police":"🚔", "Gyrophare":"🚨", "Coffin":"⚰️", "Nyan":"🌈"};
+    for (let k in m) if (n.includes(k)) return m[k];
+    return "🔊";
+  }
 
   if (navigator.userAgent.includes("Tesla")) { teslaMode=true; modeBtn.textContent="MODE TESLA"; modeBtn.classList.add("tesla"); document.documentElement.requestFullscreen(); }
   createButtons();
