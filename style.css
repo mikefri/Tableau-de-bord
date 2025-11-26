@@ -49,10 +49,8 @@ body {
 }
 
 #main-content {
-    /* MODIFIÉ : Réduit le padding pour gagner de l'espace */
-    padding: 15px 30px 0 30px; 
+    padding: 30px; 
     overflow-y: auto; 
-    position: relative; 
 }
 
 #weather-container {
@@ -60,26 +58,24 @@ body {
     margin: auto;
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Réduit l'espace entre les sections */
-    padding-bottom: 50px; /* Moins de marge au bas pour compenser le footer sticky */
+    gap: 30px;
 }
 
 /* --- Panneau Latéral (Sidebar) --- */
 #sidebar {
-    /* MODIFIÉ : Réduit le padding général */
     background-color: var(--sidebar-bg);
-    padding: 15px 15px; 
+    padding: 30px 15px;
     border-right: 1px solid #333;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 #sidebar h2 {
     color: var(--accent-color);
     font-size: 1.8em;
     border-bottom: 1px solid #222;
-    padding-bottom: 10px; /* Réduit le padding */
+    padding-bottom: 15px;
     margin-top: 0;
     text-align: center;
 }
@@ -88,12 +84,21 @@ body {
 .theme-separator {
     border: none;
     border-top: 1px solid var(--card-bg); 
-    margin: 10px 0; /* Réduit la marge */
+    margin: 15px 0;
 }
 
 .nav-button {
-    /* ... (inchangé) ... */
-    margin-bottom: 10px; /* Réduit l'espace entre les boutons */
+    display: block;
+    text-decoration: none;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-size: 1.6em;
+    padding: 15px 10px;
+    margin-bottom: 15px;
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s, transform 0.1s;
+    text-align: center;
+    font-weight: 500;
 }
 
 .nav-button:hover {
@@ -102,22 +107,21 @@ body {
     transform: translateY(-2px);
 }
 
-/* --- Footer sidebar ANCRÉ (Micfri v1.0) --- */
 .sidebar-footer {
     text-align: center;
     font-size: 0.9em;
     color: #666;
-    margin-top: 5px; /* Garde la marge au minimum */
 }
 
 /* ----------------------------------------------------------------------
-   NOUVEAU : GRILLE INFOS ACTUELLES
+   NOUVEAU : GRILLE INFOS ACTUELLES (Température + News)
    ---------------------------------------------------------------------- */
 
 #current-info-grid {
     display: grid;
+    /* 1ère colonne (Météo) peut être plus large que la 2ème (News) pour la temp. */
     grid-template-columns: 1.2fr 1fr; 
-    gap: 20px; /* Réduit l'espace entre les cartes */
+    gap: 30px; 
     align-items: stretch;
 }
 
@@ -138,24 +142,29 @@ body {
 
 #current-weather-card {
     text-align: center;
-    padding: 30px 20px; /* Réduit le padding interne */
+    padding: 40px 20px; /* Redonne le padding initial */
 }
 
 #location {
     font-size: 2.2em;
+    font-weight: 300;
+    color: var(--accent-color);
     margin-bottom: 5px;
 }
 
 #temperature {
     font-size: 10em; 
+    font-weight: 500;
     line-height: 1;
-    margin: 5px 0 0 0;
+    color: var(--temp-color);
+    margin: 10px 0 0 0;
 }
 
 #description {
     font-size: 2em;
     margin-top: 5px;
     margin-bottom: 0;
+    opacity: 0.9;
 }
 
 
@@ -165,51 +174,101 @@ body {
 
 #tesla-news-widget {
     text-align: left;
-    padding: 20px; /* Réduit le padding interne */
+    padding: 30px; /* Ajout d'un padding pour aligner avec le reste */
 }
 
 #tesla-news-widget h3 {
     font-size: 1.8em;
-    margin-bottom: 10px;
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+.news-list-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .news-list-mini .news-item {
+    background-color: transparent; 
+    padding: 5px 0;
+    box-shadow: none;
+    border-radius: 0;
     border-left: 3px solid var(--temp-color); 
-    padding-left: 8px;
+    padding-left: 10px;
+    display: block;
+    text-decoration: none;
+    color: var(--text-color);
 }
 
+.news-list-mini .news-item h3 {
+    font-size: 1.1em; 
+    margin: 0;
+    color: var(--text-color);
+    line-height: 1.3;
+}
+
+.news-list-mini .news-source {
+    font-size: 0.8em;
+    opacity: 0.6;
+}
 
 /* ----------------------------------------------------------------------
    Styles PRÉVISIONS (sous la grille)
    ---------------------------------------------------------------------- */
 
 #forecast-section h2 {
-    font-size: 2.2em; /* Réduit la taille du titre */
-    padding-bottom: 5px;
-    margin-bottom: 15px;
+    font-size: 2.5em;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .forecast-grid {
-    gap: 15px; /* Réduit l'espace entre les jours */
+    display: flex;
+    justify-content: space-around;
+    gap: 25px;
 }
 
 .day-forecast {
-    padding: 15px; /* Réduit le padding interne */
+    flex-grow: 1;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    border-left: 3px solid var(--accent-color);
 }
 
+.day-forecast h3 {
+    font-size: 2em;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+    color: var(--accent-color);
+}
+
+.day-forecast .temp-range {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 5px 0;
+}
+
+.day-forecast .desc {
+    font-size: 1.5em;
+    opacity: 0.7;
+}
+
+
 /* ----------------------------------------------------------------------
-   Pied de page de la MÉTÉO (ANCRÉ en bas)
+   Pied de page
    ---------------------------------------------------------------------- */
 
 .last-updated {
-    font-size: 1.1em; /* Légèrement plus petit */
-    opacity: 0.8;
-    margin-top: 5px; /* Réduit l'espace avec le contenu au dessus */
-    
-    position: sticky; 
-    bottom: 0;
-    padding: 5px 0; /* Très peu de padding */
-    background-color: var(--bg-color); 
-    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.5); 
-    z-index: 10;
+    font-size: 1.2em;
+    opacity: 0.6;
+    margin-top: 40px;
 }
