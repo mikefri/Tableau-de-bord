@@ -73,9 +73,11 @@ async function fetchWeather(lat, lon) {
         if (!response.ok) { throw new Error('Erreur de l\'API météo'); }
         const data = await response.json();
 
+        // Affichage de la météo actuelle
         document.getElementById('temperature').textContent = `${Math.round(data.current.temperature_2m)}°C`;
         document.getElementById('description').textContent = getWeatherDescription(data.current.weather_code);
         
+        // Affichage des prévisions sur 3 jours
         const forecastContainer = document.getElementById('forecast');
         forecastContainer.innerHTML = ''; 
 
@@ -99,11 +101,16 @@ async function fetchWeather(lat, lon) {
         }
 
         const now = new Date();
-        document.getElementById('last-update-time').textContent = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+        // NOTE: 'last-update-time' n'existe pas dans le HTML, cette ligne ne fait rien mais est conservée.
+        // document.getElementById('last-update-time').textContent = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
     } catch (error) {
         console.error("Erreur lors du chargement de la météo :", error);
+        
+        // 🚨 CORRECTION: Réinitialiser clairement les données en cas d'échec
+        document.getElementById('temperature').textContent = "--°C"; 
         document.getElementById('description').textContent = "Erreur de chargement des données météo.";
+        document.getElementById('forecast').innerHTML = '<p class="loading-message">Prévisions indisponibles.</p>';
     }
 }
 
@@ -187,11 +194,16 @@ function getLocation() {
                 document.getElementById('location').textContent = errorMessage;
                 document.getElementById('temperature').textContent = "--°C";
                 document.getElementById('description').textContent = "Météo indisponible.";
+                // 🚨 CORRECTION: Réinitialiser aussi les prévisions en cas d'échec GPS
+                document.getElementById('forecast').innerHTML = '<p class="loading-message">Prévisions indisponibles (Géolocalisation échouée).</p>'; 
             },
             options
         );
     } else {
         document.getElementById('location').textContent = "Erreur : La géolocalisation n'est pas supportée.";
+        document.getElementById('temperature').textContent = "--°C";
+        document.getElementById('description').textContent = "Météo indisponible.";
+        document.getElementById('forecast').innerHTML = '<p class="loading-message">Prévisions indisponibles (Géolocalisation non supportée).</p>';
     }
 }
 
@@ -262,6 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Rafraîchissement automatique
-    setInterval(getLocation, 600000); 
-    setInterval(fetchTeslaNews, 1800000); 
+    setInterval(getLocation, 600000); // Météo (toutes les 10 minutes)
+    setInterval(fetchTeslaNews, 1800000); // Actualités (toutes les 30 minutes)
 });
