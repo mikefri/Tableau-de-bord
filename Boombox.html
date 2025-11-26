@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tesla Soundboard - Liens Directs</title>
+    <title>Tesla Boombox - Soundboard Complet (Liens Directs)</title>
     <style>
         body { 
             font-family: Arial, sans-serif; 
@@ -12,13 +12,20 @@
             text-align: center; 
             padding: 20px;
         }
-        h1 { color: #cc0000; }
+        h1 { 
+            color: #cc0000; 
+            margin-bottom: 5px;
+        }
+        p { 
+            margin-bottom: 30px; 
+            color: #aaa;
+        }
         .sound-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 15px; 
-            max-width: 900px; 
-            margin: 30px auto; 
+            max-width: 1200px; 
+            margin: 0 auto; 
         }
         .sound-button {
             background-color: #333333; 
@@ -29,6 +36,10 @@
             cursor: pointer;
             border-radius: 8px; 
             transition: background-color 0.2s, transform 0.1s;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            display: block; /* S'assure que le bouton prend toute la grille */
         }
         .sound-button:active { 
             background-color: #555555;
@@ -38,38 +49,166 @@
 </head>
 <body>
 
-    <h1>🔊 Ma Boombox Tesla (Lien Direct)</h1>
-    <p>Cliquez pour lire un son via les haut-parleurs de la voiture (si la fonction est prise en charge par le navigateur).</p>
+    <h1>🔊 Ma Boombox Tesla</h1>
+    <p>Collection complète de sons jouables directement via le navigateur de votre voiture.</p>
 
     <div class="sound-grid">
-        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_hohoho_merry_christmas-r1frBnsvamBMLFlcog976m3Z539OFT.wav')">
-            Ho Ho Ho - Merry Christmas
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_airplane_seat_belt-ICXQr2NE0prHbLdbXmNs2FsEIefbHg.wav')">
+            Airplane seatbelt
         </button>
-
-        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_star_wars_r2d2-WSoqiVyhcPud2Xe99nPexi2boxvbmg.wav')">
-            Star Wars - R2D2
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_back_from_the_future-dSUO4aRO5vp6Rg5fjQg9okCN0c2Wak.wav')">
+            Back from the future
         </button>
-
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_bicycle_bell-qetKLlAARssJvuZ234VLqc67rUW83G.wav')">
+            Bicycle bell
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_camera_snapshot-4oW2u1iYwvkp1prbzNgm958DQX2y5d.wav')">
+            Camera snapshot
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_cat_meow-UAcS4hMeN89kxUeFR5952wdvIz2bHu.wav')">
+            Cat meow
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_cavalry_charge-8ifMRYTNR1h9ZUf3WjfdHb9oaNx01Z.wav')">
+            Cavalry charge
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_close_and_teleport-H1f5LqvmvOwN2lmENtwsm8y6fiJLVr.wav')">
+            Close and teleport
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_counterstrike_gogogo-DSFxGuheEhgooJ767bT4DlXmef9kuA.wav')">
+            CounterStrike - Go Go Go!
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_counterstrike_ok_lets_go-HIwQcMqDd18Z68UaER9UHJ4jwd78Hb.wav')">
+            CounterStrike - Ok, let's go!
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_dj_airhorn-tu0xZ1Rd6bsTMkqsKBPLNY5TrAR0at.wav')">
+            DJ Airhorn
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_diablo_ii_fire_resist-WWNzcR9LhAPDQZQ1QXVsX8cs2ncJlk.wav')">
+            Diablo II - Fire resist
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_dog-bark-MWxTyFioXNEUZd3HsdyRKxwxEQgyEx.wav')">
+            Dog bark
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_duck_toy-BoqjnxYDAqci5I0NMQerN2TIwfsMdV.wav')">
+            Duck Toy
+        </button>
         <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_elon_musk_go_fuck_yourself-1w6QYH7SHWxSQV1u5ZCkZGtl69U18f.wav')">
             Elon Musk - Go F*ck Yourself
         </button>
-
-        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_windows_xp_shutdown-cqsiNxq4AlWGAAlL2uwaoalHGlhNui.wav')">
-            Windows XP - Shutdown
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_everyday_im_shufflin-9Snsne1GgnAFHLl50x1ctw794uyLx7.wav')">
+            Everyday I'm shufflin
         </button>
-        
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_flo_rida_whistle-IJKyhPJMYNFT7DK32ABffpSWn7Kg8z.wav')">
+            Flo Rida - Whistle
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_hohoho_merry_christmas-r1frBnsvamBMLFlcog976m3Z539OFT.wav')">
+            Ho Ho Ho - Merry Christmas
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_7e_cie_jai_glisse_chef-WyZxHrUwiljgusmVe6gNV0YlweiZQr.wav')">
+            J'ai glissé chef
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_joker-laugh-0za6dtexCOYnBHaWH3N1ee8ku4cMVl.wav')">
+            Joker laugh
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_k2000_kitt_scanner-y1tYkWBo1aFzYp303cSQdDoiG1xG04.wav')">
+            K2000 - KITT scanner
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_mandalorian_this_is_the_way-jRAvIZdWFH063R5a5yWMNRVVK8on8B.wav')">
+            Mandalorian - This is the way
+        </button>
         <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_minecraft_close_door-JibeUIXNZkCXnkNAbO7icQj1uS8XO3.wav')">
             Minecraft - Close door
         </button>
-
-        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_super_mario_its_me_mario-YPi0DJxA9QFojFNKDRxrJ7ziYwJUOh.wav')">
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_mortal_kombat_fatality-RNtpfZSwuMXim7uVfitxtABkdUSIm1.wav')">
+            Mortal Kombat - Fatality
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_netflix_logo-sMrhUcfF6YOxRxQmPWLr90Ktf6mBif.wav')">
+            Netflix logo
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_old_klaxon-jKdzjHqpnBSBrylzumObOOuwJknLN9.wav')">
+            Old klaxon
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_old_school_alarm-1UvZl83DeJf4eVjS7JieQXi4IgOjAH.wav')">
+            Old school alarm
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_pacman_dies-HwV7k4OifqP1wJ1tGiFTfF9bzdfX0k.wav')">
+            PacMan
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_pokemon_level_up-SGf5vTgOayV77VGdgC8d3xlhUhhU1G.wav')">
+            Pokemon - Level up
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_pokemon_pikachu-ofjMY3NahHEQfPc8vrh0K3hUgSkuiN.wav')">
+            Pokemon - Pikachu
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_portal_sleep_mode-rbidBjeqT9EmAExQAO3RBtTpmlkga5.wav')">
+            Portal - Sleep mode activated
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_queen_goodbye_everybody-t84K3HNWFcOvneb2gWzZVwbYTyA2Er.wav')">
+            Queen - Goodbye everybody
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_sega-Y5yRmFoAMZgcvoeceRPg4pau061zBm.wav')">
+            SEGA
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_simpsons_salut_bande_de_nuls-fYFFJy0fXyVRIL1vCb0Cqg2FqHF6cn.wav')">
+            Simpsons - Salut, bande de nuls !
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_star_wars_chewbacca-n1kjugK7I77o9TVs9PLMwWZnNVbk85.wav')">
+            Star Wars - Chewbacca
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_star_wars_darth_vader-Baa53nd9ecoHTy5XbhayA4OB3H2zJq.wav')">
+            Star Wars - Darth Vader
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_starwars_lightsaber_off-rSyIz0us8XncuCi6t4bXRIrS2PSr6V.wav')">
+            Star Wars - Lightsaber Off
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_star_wars_r2d2-WSoqiVyhcPud2Xe99nPexi2boxvbmg.wav')">
+            Star Wars - R2D2
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_super_mario_game_over-usK9lMgVP1U3iKL0EIM3Derd8SfvJU.wav')">
+            Super Mario - Game over
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_its_me_mario-YPi0DJxA9QFojFNKDRxrJ7ziYwJUOh.wav')">
             Super Mario - It's me, Mario!
         </button>
-        
-        </div>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_super_mario_lets_go-Ytrv0pG213gNPpMEsC04RPWMIk2Cwk.wav')">
+            Super Mario - Let's Go
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_super_mario_level_complete-cN87Xh3rkJkorHurbb3UySFSn0Z799.wav')">
+            Super Mario - Level complete
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_terminator_ill_be_back-ODCiTvMtzlUOvtbSTOcFBsmzvx7RTn.wav')">
+            Terminator - I'll be back
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_transformers_transform-R3QLV7I1MooAupZANdr7mQeHFFo9Ju.wav')">
+            Transformers - Transform
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_you_cant_touch_this-C4MpLGoIDru3k5gp4T7cRaQYzq7w86.wav')">
+            U Can't Touch This
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_warcraft_job_done-uyyXSe8XBd8VBUMP8HxQOT9yMkxxw5.wav')">
+            Warcraft - Job's done!
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_windows_95_tada-KFFryoYDGZicoNYVt3dayJN16rJlyJ.wav')">
+            Windows 95 - Tada
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_windows_xp_error-Ha50ofoxXZwfM3fGMU3q75x0knPIGL.wav')">
+            Windows XP - Error
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_windows_xp_shutdown-cqsiNxq4AlWGAAlL2uwaoalHGlhNui.wav')">
+            Windows XP - Shutdown
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_worms_armed-tsJnrhsnhVaj6zFSOFxXIqYsbUkWG9.wav')">
+            Worms - Armed
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_x-files-theme-nUWIoTjv4WXrHjq8C1c2YDQ4WhGa1w.wav')">
+            X-Files theme
+        </button>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_zelda_secret-uf8yRqPDnJOcnIWIVKwKIahaLtktEr.wav')">
+            Zelda - Secret
+        </button>
+    </div>
 
     <script>
-        // La fonction réutilise un objet Audio pour éviter les problèmes de lecture rapide
         let currentAudio = null;
 
         function playSound(soundPath) {
@@ -79,11 +218,14 @@
                 currentAudio.currentTime = 0;
             }
             
-            // Crée un nouvel objet Audio et le joue
+            // Crée un nouvel objet Audio en utilisant le lien direct
             currentAudio = new Audio(soundPath);
+            
+            // Lance la lecture
             currentAudio.play().catch(error => {
                 console.error("Erreur de lecture audio:", error);
-                alert("Erreur : La lecture audio a été bloquée. (Souvent un problème de politique d'autoplay des navigateurs)");
+                // Un message d'alerte peut aider l'utilisateur s'il y a un blocage de l'autoplay
+                // alert("Erreur : Impossible de jouer le son. Vérifiez les paramètres du navigateur.");
             });
         }
     </script>
