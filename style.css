@@ -1,41 +1,101 @@
 /* ======================================================================
-   style.css - Design Moderne et Épuré pour Tesla
+   style.css - Design Moderne et Bi-colonne
    ====================================================================== */
 
 :root {
-    --bg-color: #121212; /* Noir très sombre */
-    --text-color: #E0E0E0; /* Blanc cassé (doux) */
-    --accent-color: #00A8FF; /* Bleu Tesla / Électrique */
-    --temp-color: #4CAF50; /* Vert pour la température (Climat) */
-    --card-bg: #1E1E1E; /* Fond des cartes légèrement plus clair que le fond général */
+    --bg-color: #121212; 
+    --text-color: #E0E0E0; 
+    --accent-color: #00A8FF; 
+    --temp-color: #4CAF50; 
+    --card-bg: #1E1E1E; 
+    --sidebar-bg: #0A0A0A; /* Encore plus sombre pour la sidebar */
     --border-radius: 12px;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Police moderne et claire */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
-    padding: 30px;
-    text-align: center;
+    padding: 0; /* Padding retiré du body pour le full screen */
     min-height: 100vh;
 }
 
+/* --- Mise en page GRID : Panneau + Contenu Principal --- */
+#app-container {
+    display: grid;
+    /* 1 colonne pour la sidebar (280px) | 1 colonne pour le contenu principal (le reste) */
+    grid-template-columns: 280px 1fr; 
+    gap: 0;
+    min-height: 100vh;
+}
+
+/* Contenu principal de la météo */
+#main-content {
+    padding: 30px; /* Padding de l'ancienne body, appliqué ici */
+    overflow-y: auto; /* Permet le défilement si le contenu est trop grand */
+}
+
 #weather-container {
-    max-width: 1200px;
+    max-width: 100%; /* S'adapte au main-content */
     margin: auto;
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
-/* --- Météo Actuelle --- */
+/* --- Panneau Latéral (Sidebar) --- */
+#sidebar {
+    background-color: var(--sidebar-bg);
+    padding: 30px 15px;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#sidebar h2 {
+    color: var(--accent-color);
+    font-size: 1.8em;
+    border-bottom: 1px solid #222;
+    padding-bottom: 15px;
+    margin-top: 0;
+    text-align: center;
+}
+
+.nav-button {
+    display: block;
+    text-decoration: none;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-size: 1.6em;
+    padding: 15px 10px;
+    margin-bottom: 15px;
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s, transform 0.1s;
+    text-align: center;
+    font-weight: 500;
+}
+
+.nav-button:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    transform: translateY(-2px);
+}
+
+.sidebar-footer {
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* --- Le reste des styles MÉTÉO (du code précédent) doit suivre ici --- */
 
 #current-weather-card {
     background: var(--card-bg);
     border-radius: var(--border-radius);
     padding: 40px 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Ombre subtile */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); 
 }
 
 #location {
@@ -46,7 +106,7 @@ body {
 }
 
 #temperature {
-    font-size: 14em; /* ENORME pour la visibilité immédiate */
+    font-size: 12em; /* Légèrement réduit pour s'adapter à la largeur */
     font-weight: 500;
     line-height: 1.1;
     color: var(--temp-color);
@@ -54,14 +114,11 @@ body {
 }
 
 #description {
-    font-size: 3em;
-    font-weight: 400;
+    font-size: 2.5em;
     margin-top: -15px;
     margin-bottom: 20px;
     opacity: 0.9;
 }
-
-/* --- Prévisions Futures --- */
 
 #forecast-section h2 {
     font-size: 2.5em;
@@ -83,16 +140,11 @@ body {
     background-color: var(--card-bg);
     border-radius: var(--border-radius);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    border-left: 3px solid var(--accent-color); /* Ligne d'accentuation */
-    transition: transform 0.2s;
-}
-
-.day-forecast:hover {
-    transform: translateY(-5px); /* Petit effet au survol (si le Tesla le supporte) */
+    border-left: 3px solid var(--accent-color);
 }
 
 .day-forecast h3 {
-    font-size: 2.2em;
+    font-size: 2em;
     margin: 0 0 10px 0;
     font-weight: 500;
     color: var(--accent-color);
@@ -109,8 +161,6 @@ body {
     font-size: 1.5em;
     opacity: 0.7;
 }
-
-/* --- Footer et Mise à jour --- */
 
 .last-updated {
     font-size: 1.2em;
