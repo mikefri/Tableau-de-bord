@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Météo Tesla - Votre Localisation</title>
+    <title>Météo Tesla - Position GPS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="weather-container">
         <h1>☀️ Météo Actuelle</h1>
-        <p id="location">Chargement de la localisation...</p>
+        <p id="location">Recherche de la position GPS...</p>
 
         <div id="current-weather">
             <p id="temperature">--°C</p>
-            <p id="description">Chargement...</p>
+            <p id="description">Veuillez autoriser le partage de position.</p>
         </div>
-
-        <div id="forecast">
-            <h2>Prévisions à 3 jours</h2>
-            </div>
+        
+        <hr> <div id="forecast-section">
+            <h2>Prévisions sur 3 Jours</h2>
+            <div id="forecast" class="forecast-grid">
+                </div>
+        </div>
 
         <p class="last-updated">Dernière mise à jour : <span id="last-update-time">--:--</span></p>
     </div>
