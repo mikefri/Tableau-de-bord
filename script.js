@@ -1,7 +1,6 @@
 // script.js
-// Pas de clé API nécessaire avec Open-Meteo !
+// ... (Gardez la fonction getWeatherDescription exactement comme précédemment) ...
 
-// Fonction pour traduire le code météo d'Open-Meteo en texte ou emoji
 function getWeatherDescription(code) {
     // Les codes sont basés sur la classification WMO (Organisation Météorologique Mondiale)
     switch (code) {
@@ -13,13 +12,13 @@ function getWeatherDescription(code) {
         case 48: return '🌫️ Brouillard';
         case 51:
         case 53:
-        case 55: return '🌧️ Bruine légère';
+        case 55: return '🌧️ Bruine';
         case 61:
         case 63:
         case 65: return '🌧️ Pluie';
         case 71:
         case 73:
-        case 75: return '❄️ Chute de neige';
+        case 75: return '❄️ Neige';
         case 80:
         case 81:
         case 82: return '🌧️ Averses';
@@ -32,10 +31,9 @@ function getWeatherDescription(code) {
 
 
 async function fetchWeather(lat, lon) {
-    // 1. URL de l'API Open-Meteo utilisant la lat/lon
-    // Nous demandons la température actuelle, le code météo, et l'heure locale
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&timezone=auto`;
-
+    // 1. URL de l'API Open-Meteo (maintenant avec les prévisions quotidiennes 'daily')
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=4`; // 'forecast_days=4' car le premier jour est aujourd'hui
+    
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -43,56 +41,75 @@ async function fetchWeather(lat, lon) {
         }
         const data = await response.json();
 
-        // 2. Mise à jour du HTML
-        document.getElementById('location').textContent = `Météo pour : ${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+        // --- Météo Actuelle ---
+        document.getElementById('location').textContent = `Localisation : ${lat.toFixed(3)}, ${lon.toFixed(3)}`;
         document.getElementById('temperature').textContent = `${Math.round(data.current.temperature_2m)}°C`;
+        document.getElementById('description').textContent = getWeatherDescription(data.current.weather_code);
         
-        const description = getWeatherDescription(data.current.weather_code);
-        document.getElementById('description').textContent = description;
-        
-        // 3. Mise à jour de l'heure
+        // --- Prévisions Journalières ---
+        const forecastContainer = document.getElementById('forecast');
+        forecastContainer.innerHTML = ''; // Vider le contenu précédent
+
+        // On boucle à partir de l'index 1 (car l'index 0 est aujourd'hui, déjà affiché en actuel)
+        for (let i = 1; i < data.daily.time.length; i++) {
+            const dateStr = data.daily.time[i]; // ex: "2025-11-27"
+            const maxTemp = Math.round(data.daily.temperature_2m_max[i]);
+            const minTemp = Math.round(data.daily.temperature_2m_min[i]);
+            const weatherCode = data.daily.weather_code[i];
+
+            // Formater la date (ex: Jeudi)
+            const date = new Date(dateStr);
+            const dayName = date.toLocaleDateString('fr-FR', { weekday: 'long' });
+
+            // Création de l'élément HTML pour le jour
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'day-forecast';
+            dayDiv.innerHTML = `
+                <h3>${dayName}</h3>
+                <p class="temp-range">${minTemp}°C / ${maxTemp}°C</p>
+                <p class="desc">${getWeatherDescription(weatherCode)}</p>
+            `;
+            forecastContainer.appendChild(dayDiv);
+        }
+
+        // --- Mise à jour de l'heure ---
         const now = new Date();
         document.getElementById('last-update-time').textContent = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
     } catch (error) {
         console.error("Erreur lors du chargement de la météo :", error);
-        document.getElementById('description').textContent = "Erreur de chargement des données météo.";
+        document.getElementById('description').textContent = "Erreur de chargement. Veuillez vérifier la connexion.";
     }
 }
 
+// ... (Gardez la fonction getLocation et les appels initiaux/intervalle exactement comme précédemment) ...
+
 function getLocation() {
-    // Vérifie si le navigateur supporte la géolocalisation
     if (navigator.geolocation) {
-        // Options pour une lecture précise et rapide du GPS
         const options = {
             enableHighAccuracy: true,
             timeout: 5000,
             maximumAge: 0
         };
 
-        // Lancement de la demande de position
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                // Succès : position trouvée
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
                 document.getElementById('location').textContent = "Position GPS trouvée...";
-                
-                // On appelle la fonction de météo avec la nouvelle position
                 fetchWeather(lat, lon);
             },
             (error) => {
-                // Échec : gestion des erreurs (ex: l'utilisateur refuse le partage)
                 let errorMessage = "Erreur GPS : ";
                 switch(error.code) {
                     case error.PERMISSION_DENIED:
-                        errorMessage += "Accès à la position refusé par l'utilisateur.";
+                        errorMessage += "Accès refusé. Autorisez le partage de position.";
                         break;
                     case error.POSITION_UNAVAILABLE:
                         errorMessage += "Position non disponible.";
                         break;
                     case error.TIMEOUT:
-                        errorMessage += "Délai de recherche de position expiré.";
+                        errorMessage += "Délai expiré.";
                         break;
                     default:
                         errorMessage += "Erreur inconnue.";
@@ -104,12 +121,10 @@ function getLocation() {
             options
         );
     } else {
-        // Le navigateur ne supporte pas l'API
-        document.getElementById('location').textContent = "Erreur : La géolocalisation n'est pas supportée par ce navigateur.";
+        document.getElementById('location').textContent = "Erreur : La géolocalisation n'est pas supportée.";
     }
 }
 
-// Lancer le processus de localisation au démarrage
+// Lancement
 getLocation(); 
-// Rafraîchir toutes les 10 minutes (recherche de position + météo)
-setInterval(getLocation, 600000);
+setInterval(getLocation, 600000); // Rafraîchissement toutes les 10 minutes
