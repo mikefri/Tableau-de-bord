@@ -3,7 +3,7 @@
 // ======================================================================
 
 // CLÉ API CURRENTS API FOURNIE
-const CURRENTS_API_KEY = 'e3bgyKbvzj7RGnIGNYJ3lw3aBw5wKQAc9b84mxKNWmSawNPq'; 
+const CURRENTS_API_KEY = 'IITIY-CTxAkIyqb1uToNRzuoXV-73Ox_XPZ5AeE5vVn42Rt3'; 
 // ======================================================================
 
 
