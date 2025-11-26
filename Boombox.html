@@ -1,100 +1,92 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boombox Mega Pack – lockchime.wav.christmas Edition</title>
-  <style>
-    body{margin:0;background:#000;color:#fff;font-family:system-ui;overflow:hidden;height:100vh;}
-    header{background:#111;padding:20px;text-align:center;position:relative;}
-    h1{font-size:30px;background:linear-gradient(90deg,#fff,#e82127);-webkit-background-clip:text;color:transparent;}
-    .mode{position:absolute;right:15px;top:15px;padding:10px 20px;background:#333;border-radius:50px;font-weight:bold;cursor:pointer;}
-    .mode.tesla{background:#e82127;}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;padding:20px;}
-    button{background:#222;border:none;border-radius:20px;padding:24px;font-size:18px;cursor:pointer;transition:.2s;box-shadow:0 8px 20px #0008;}
-    button:active{background:#e82127;transform:scale(0.94);}
-    .cat{color:#e82127;font-size:24px;margin:35px 0 10px;font-weight:bold;}
-    .stop{grid-column:1/-1;background:#e82127!important;font-size:30px!important;padding:35px!important;animation:glow 2s infinite;}
-    @keyframes glow{0%,100%{box-shadow:0 0 20px #e82127}50%{box-shadow:0 0 40px #e82127}}
-    .unlock{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#e82127;color:#fff;padding:40px 80px;border-radius:20px;font-size:30px;z-index:999;}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla Soundboard - Liens Directs</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #1a1a1a; 
+            color: #ffffff; 
+            text-align: center; 
+            padding: 20px;
+        }
+        h1 { color: #cc0000; }
+        .sound-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 15px; 
+            max-width: 900px; 
+            margin: 30px auto; 
+        }
+        .sound-button {
+            background-color: #333333; 
+            border: none; 
+            color: white;
+            padding: 20px 10px; 
+            font-size: 16px; 
+            cursor: pointer;
+            border-radius: 8px; 
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .sound-button:active { 
+            background-color: #555555;
+            transform: scale(0.98); 
+        }
+    </style>
 </head>
 <body>
 
-<header><h1>BOOMBOX × lockchime.wav.christmas</h1>
-  <div id="mode" class="mode">MODE PC</div>
-</header>
+    <h1>🔊 Ma Boombox Tesla (Lien Direct)</h1>
+    <p>Cliquez pour lire un son via les haut-parleurs de la voiture (si la fonction est prise en charge par le navigateur).</p>
 
-<div id="unlock" class="unlock">Clique ici pour activer le son</div>
+    <div class="sound-grid">
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_hohoho_merry_christmas-r1frBnsvamBMLFlcog976m3Z539OFT.wav')">
+            Ho Ho Ho - Merry Christmas
+        </button>
 
-<div class="grid" id="grid"></div>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_star_wars_r2d2-WSoqiVyhcPud2Xe99nPexi2boxvbmg.wav')">
+            Star Wars - R2D2
+        </button>
 
-<audio id="player"></audio>
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_elon_musk_go_fuck_yourself-1w6QYH7SHWxSQV1u5ZCkZGtl69U18f.wav')">
+            Elon Musk - Go F*ck Yourself
+        </button>
 
-<script>
-  const base = "https://lockchime.wav.christmas/wp-content/uploads/2023/12/";
-  const sounds = [
-    {cat:"LOCK CHIMES",list:[
-      {n:"Default LockChime",id:"lockchime",url:base+"LockChime.wav"},
-      {n:"Airplane Seatbelt",id:"seatbelt",url:base+"Airplane-Seatbelt.wav"},
-      {n:"Charge Complete",id:"charge",url:base+"LockChime_Charge.wav"},
-    ]},
-    {cat:"BOOMBOX CLASSIQUES",list:[
-      {n:"Mars",id:"mars",url:base+"Boombox_Mars.wav"},
-      {n:"Applause",id:"applause",url:base+"Boombox_Applause.wav"},
-      {n:"Snake",id:"snake",url:base+"Boombox_Snake.wav"},
-      {n:"La Cucaracha",id:"lacunaracha",url:base+"Boombox_LaCucaracha.wav"},
-    ]},
-    {cat:"TROLL ULTIME",list:[
-      {n:"Fart Symphony",id:"fart",url:base+"Boombox_Fart.wav"},
-      {n:"Rick Roll",id:"rickroll",url:base+"Boombox_RickRoll.wav"},
-      {n:"Police US",id:"police",url:base+"Boombox_PoliceUS.wav"},
-      {n:"Gyrophare FR",id:"frenchsiren",url:base+"Boombox_GyrophareFR.wav"},
-      {n:"Coffin Dance",id:"coffin",url:base+"Boombox_CoffinDance.wav"},
-      {n:"Nyan Cat",id:"nyan",url:base+"Boombox_NyanCat.wav"},
-      {n:"Purge Siren",id:"purge",url:base+"Boombox_PurgeSiren.wav"},
-    ]}
-  ];
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_windows_xp_shutdown-cqsiNxq4AlWGAAlL2uwaoalHGlhNui.wav')">
+            Windows XP - Shutdown
+        </button>
+        
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_minecraft_close_door-JibeUIXNZkCXnkNAbO7icQj1uS8XO3.wav')">
+            Minecraft - Close door
+        </button>
 
-  let teslaMode = false;
-  const player = document.getElementById("player");
-  const unlock = document.getElementById("unlock");
-  const modeBtn = document.getElementById("mode");
-  const grid = document.getElementById("grid");
+        <button class="sound-button" onclick="playSound('https://wyrq70qgjygo7e8j.public.blob.vercel-storage.com/LockChime_super_mario_its_me_mario-YPi0DJxA9QFojFNKDRxrJ7ziYwJUOh.wav')">
+            Super Mario - It's me, Mario!
+        </button>
+        
+        </div>
 
-  // Déblocage audio en un clic
-  document.body.onclick = unlock.onclick = () => {
-    new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==").play()
-      .then(() => unlock.style.display="none");
-  };
+    <script>
+        // La fonction réutilise un objet Audio pour éviter les problèmes de lecture rapide
+        let currentAudio = null;
 
-  modeBtn.onclick = () => {
-    teslaMode = !teslaMode;
-    modeBtn.textContent = teslaMode ? "MODE TESLA" : "MODE PC";
-    modeBtn.classList.toggle("tesla");
-  };
+        function playSound(soundPath) {
+            // Arrête le son précédent s'il existe
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+            
+            // Crée un nouvel objet Audio et le joue
+            currentAudio = new Audio(soundPath);
+            currentAudio.play().catch(error => {
+                console.error("Erreur de lecture audio:", error);
+                alert("Erreur : La lecture audio a été bloquée. (Souvent un problème de politique d'autoplay des navigateurs)");
+            });
+        }
+    </script>
 
-  // Génération des boutons
-  sounds.forEach(cat => {
-    const title = document.createElement("div"); title.className="cat"; title.textContent=cat.cat; grid.appendChild(title);
-    cat.list.forEach(s => {
-      const b = document.createElement("button");
-      b.textContent = s.n;
-      b.onclick = () => teslaMode ? location.href=`tesla://boombox?sound=${s.id}` : (player.src=s.url, player.play());
-      grid.appendChild(b);
-    });
-  });
-
-  // Bouton STOP
-  const stop = document.createElement("button"); stop.className="stop"; stop.textContent="STOP IMMÉDIAT";
-  stop.onclick = () => teslaMode ? location.href="tesla://boombox?stop=1" : player.pause();
-  grid.appendChild(stop);
-
-  // Auto-détection Tesla
-  if (/Tesla/i.test(navigator.userAgent)) {
-    teslaMode = true; modeBtn.textContent="MODE TESLA"; modeBtn.classList.add("tesla");
-    document.documentElement.requestFullscreen();
-  }
-</script>
 </body>
 </html>
