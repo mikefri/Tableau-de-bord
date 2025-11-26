@@ -103,9 +103,7 @@ async function fetchWeather(lat, lon) {
             forecastContainer.appendChild(dayDiv);
         }
 
-        const now = new Date();
-        // 🌟 CORRECTION: Activation de l'affichage de l'heure de mise à jour
-        document.getElementById('last-update-time').textContent = `Dernière maj : ${now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
+
 
     } catch (error) {
         console.error("Erreur lors du chargement de la météo :", error);
