@@ -10,14 +10,22 @@
     <div id="app-container">
         
         <div id="sidebar">
-            <h2>Navigation Rapide</h2>
+            <h2>🚀 Navigation Rapide</h2>
             <nav>
                 <a href="https://mikefri.github.io/Teslatv/" class="nav-button" target="_blank">📺 Tesla tv</a>
                 <a href="https://radios-web-mp-3.vercel.app/" class="nav-button" target="_blank">🎶 MP3</a>
                 <a href="https://mikefri.github.io/RadiosWeb/" class="nav-button" target="_blank">🎶 Radio</a>
                 
-                <a href="#" id="reload-button" class="nav-button">🔄  Météo</a>
+                <hr class="theme-separator"> 
+                
+                <a href="#" id="theme-dark" class="nav-button theme-switcher">⚫ Mode Sombre</a>
+                <a href="#" id="theme-light" class="nav-button theme-switcher">⚪ Mode Clair</a>
+                
+                <hr class="theme-separator"> 
+                
+                <a href="#" id="reload-button" class="nav-button">🔄 Météo & Actus</a>
             </nav>
+            
             <div class="sidebar-footer">
                 <p>Micfri v1.0</p>
             </div>
@@ -37,7 +45,14 @@
                 <div id="forecast-section">
                     <h2>Prévisions sur 3 Jours</h2>
                     <div id="forecast" class="forecast-grid">
-                        </div>
+                    </div>
+                </div>
+                
+                <div id="tesla-news-section">
+                    <h2>📰 Actualités Tesla Récentes</h2>
+                    <div id="tesla-news" class="news-list">
+                        <p class="loading-message">Chargement des actualités...</p>
+                    </div>
                 </div>
     
                 <p class="last-updated">Dernière mise à jour : <span id="last-update-time">--:--</span></p>
