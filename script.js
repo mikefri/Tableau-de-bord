@@ -1,9 +1,8 @@
 // ======================================================================
-// SCRIPT.JS - Tableau de Bord Tesla (FINAL avec Météo, News, Thème)
+// SCRIPT.JS - Tableau de Bord Tesla (Final, MÉTÉO, NEWS, THÈME)
 // ======================================================================
 
-// CLÉ API CURRENTS API FOURNIE
-const CURRENTS_API_KEY = 'IITIY-CTxAkIyqb1uToNRzuoXV-73Ox_XPZ5AeE5vVn42Rt3'; 
+// AUCUNE CLÉ API NÉCESSAIRE POUR LES ACTUALITÉS (Utilisation de Flux RSS public)
 // ======================================================================
 
 
@@ -45,9 +44,7 @@ async function fetchCityName(lat, lon) {
     
     try {
         const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error('Erreur de l\'API Nominatim');
-        }
+        if (!response.ok) { throw new Error('Erreur de l\'API Nominatim'); }
         const data = await response.json();
 
         if (data.address.city) return data.address.city;
@@ -73,9 +70,7 @@ async function fetchWeather(lat, lon) {
 
     try {
         const response = await fetch(weatherUrl);
-        if (!response.ok) {
-            throw new Error('Erreur de l\'API météo');
-        }
+        if (!response.ok) { throw new Error('Erreur de l\'API météo'); }
         const data = await response.json();
 
         document.getElementById('temperature').textContent = `${Math.round(data.current.temperature_2m)}°C`;
@@ -112,33 +107,32 @@ async function fetchWeather(lat, lon) {
     }
 }
 
+
 // ----------------------------------------------------------------------
-// 3. ACTUALITÉS TESLA (Currents API)
+// 3. ACTUALITÉS TESLA (Utilisation de RSS2JSON - Stable)
 // ----------------------------------------------------------------------
 
 async function fetchTeslaNews() {
     const newsContainer = document.getElementById('tesla-news');
-    newsContainer.innerHTML = '<p class="loading-message">Chargement des actualités...</p>';
+    newsContainer.innerHTML = '<p class="loading-message">Chargement des actualités via RSS...</p>';
 
-    // Requête via Currents API
-    const url = `https://api.currentsapi.services/v1/search?keywords=Tesla&language=fr&apiKey=${CURRENTS_API_KEY}&limit=3`; 
+    // Flux RSS de Google News filtré sur 'Tesla' et la langue française
+    const rssFeedUrl = encodeURIComponent('https://news.google.com/rss/search?q=Tesla&hl=fr&gl=FR&ceid=FR:fr');
+    const url = `https://api.rss2json.com/v1/api.json?rss_url=${rssFeedUrl}`; 
 
     try {
         const response = await fetch(url);
         
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(`Erreur API Currents (${response.status}): ${errorData.description || 'Problème de connexion.'}`);
-        }
+        if (!response.ok) { throw new Error(`Erreur API RSS2JSON (${response.status})`); }
         
         const data = await response.json();
 
         newsContainer.innerHTML = ''; 
 
-        if (data.news && data.news.length > 0) {
-            data.news.forEach(article => { 
+        if (data.status === 'ok' && data.items.length > 0) {
+            data.items.slice(0, 3).forEach(article => { 
                 
-                const publishedDate = new Date(article.published);
+                const publishedDate = new Date(article.pubDate);
                 const formattedDate = publishedDate.toLocaleDateString('fr-FR', {
                     day: 'numeric',
                     month: 'short',
@@ -148,22 +142,22 @@ async function fetchTeslaNews() {
 
                 const articleDiv = document.createElement('a');
                 articleDiv.className = 'news-item';
-                articleDiv.href = article.url;
+                articleDiv.href = article.link; 
                 articleDiv.target = '_blank'; 
                 
                 articleDiv.innerHTML = `
                     <h3>${article.title}</h3>
-                    <p class="news-source">${article.source.name} - ${formattedDate}</p>
+                    <p class="news-source">${article.author || 'Google News'} - ${formattedDate}</p>
                 `;
                 newsContainer.appendChild(articleDiv);
             });
         } else {
-            newsContainer.innerHTML = '<p class="loading-message">Aucune actualité Tesla récente trouvée en français.</p>';
+            newsContainer.innerHTML = '<p class="loading-message">Aucune actualité Tesla récente trouvée via le flux RSS.</p>';
         }
 
     } catch (error) {
         console.error("Erreur lors du chargement des actualités Tesla :", error);
-        newsContainer.innerHTML = `<p class="loading-message" style="color:red;">Erreur: ${error.message}. Vérifiez la clé API.</p>`;
+        newsContainer.innerHTML = `<p class="loading-message" style="color:red;">Erreur de connexion aux actualités (RSS).</p>`;
     }
 }
 
