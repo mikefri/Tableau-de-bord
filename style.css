@@ -1,72 +1,119 @@
-/* style.css */
+/* ======================================================================
+   style.css - Design Moderne et Épuré pour Tesla
+   ====================================================================== */
+
+:root {
+    --bg-color: #121212; /* Noir très sombre */
+    --text-color: #E0E0E0; /* Blanc cassé (doux) */
+    --accent-color: #00A8FF; /* Bleu Tesla / Électrique */
+    --temp-color: #4CAF50; /* Vert pour la température (Climat) */
+    --card-bg: #1E1E1E; /* Fond des cartes légèrement plus clair que le fond général */
+    --border-radius: 12px;
+}
+
 body {
-    background-color: #1a1a1a; 
-    color: #f0f0f0; 
-    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Police moderne et claire */
     margin: 0;
-    padding: 20px;
+    padding: 30px;
     text-align: center;
+    min-height: 100vh;
 }
 
 #weather-container {
-    max-width: 1000px; /* Légèrement plus large pour les 3 colonnes */
+    max-width: 1200px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-h1 {
-    font-size: 3em; 
-    margin-bottom: 0.5em;
+/* --- Météo Actuelle --- */
+
+#current-weather-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 40px 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Ombre subtile */
+}
+
+#location {
+    font-size: 2.5em;
+    font-weight: 300;
+    color: var(--accent-color);
+    margin-bottom: 5px;
 }
 
 #temperature {
-    font-size: 8em; 
-    font-weight: bold;
-    color: #4CAF50; /* Vert */
+    font-size: 14em; /* ENORME pour la visibilité immédiate */
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--temp-color);
+    margin: 0;
 }
 
 #description {
+    font-size: 3em;
+    font-weight: 400;
+    margin-top: -15px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+/* --- Prévisions Futures --- */
+
+#forecast-section h2 {
     font-size: 2.5em;
-    margin-top: -30px; 
+    color: var(--text-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-#location, .last-updated {
-    font-size: 1.5em;
-    opacity: 0.8;
-}
-
-hr {
-    border: 0;
-    border-top: 1px solid #333;
-    margin: 40px 0;
-}
-
-/* Style pour la grille de prévisions (Flexbox pour la simplicité) */
 .forecast-grid {
     display: flex;
     justify-content: space-around;
-    gap: 15px;
+    gap: 25px;
 }
 
 .day-forecast {
-    flex-grow: 1; /* Chaque jour prend la même place */
-    padding: 15px;
-    background-color: #2c2c2c;
-    border-radius: 10px;
-    min-width: 0; /* Important pour les flex items */
+    flex-grow: 1;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    border-left: 3px solid var(--accent-color); /* Ligne d'accentuation */
+    transition: transform 0.2s;
+}
+
+.day-forecast:hover {
+    transform: translateY(-5px); /* Petit effet au survol (si le Tesla le supporte) */
 }
 
 .day-forecast h3 {
-    font-size: 2em;
-    color: #FFC107; /* Jaune pour les jours */
-    margin-top: 0;
+    font-size: 2.2em;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+    color: var(--accent-color);
 }
 
 .day-forecast .temp-range {
-    font-size: 1.5em;
+    font-size: 1.8em;
     font-weight: bold;
+    color: var(--text-color);
     margin: 5px 0;
 }
 
 .day-forecast .desc {
+    font-size: 1.5em;
+    opacity: 0.7;
+}
+
+/* --- Footer et Mise à jour --- */
+
+.last-updated {
     font-size: 1.2em;
+    opacity: 0.6;
+    margin-top: 40px;
 }
